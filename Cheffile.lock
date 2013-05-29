@@ -2,9 +2,13 @@ SITE
   remote: http://community.opscode.com/api/v1
   specs:
     apt (1.9.2)
+    ark (0.2.2)
     build-essential (1.4.0)
+    chef_gem (0.1.0)
     chef_handler (1.1.4)
     dmg (1.1.0)
+    elasticsearch (0.2.7)
+      ark (>= 0.0.0)
     git (2.5.0)
       build-essential (>= 0.0.0)
       dmg (>= 0.0.0)
@@ -12,6 +16,10 @@ SITE
       windows (>= 0.0.0)
       yum (>= 0.0.0)
     imagemagick (0.2.2)
+    mysql (3.0.0)
+      build-essential (>= 0.0.0)
+      openssl (>= 0.0.0)
+    openssl (1.0.2)
     runit (1.1.4)
       build-essential (>= 0.0.0)
       yum (>= 0.0.0)
@@ -28,18 +36,12 @@ GIT
     locale (0.0.2)
 
 GIT
-  remote: https://github.com/fnichol/chef-rbenv
+  remote: https://github.com/fnichol/chef-rvm
   ref: master
-  sha: 3b1c59abc1134a50b0b8844954eca9a566aaffb8
+  sha: 7038fb8c518d0d7785767de215b1ae463f237973
   specs:
-    rbenv (0.7.3)
-
-GIT
-  remote: https://github.com/fnichol/chef-ruby_build
-  ref: v0.7.2
-  sha: c940b5e9cd40eaba10d6285de6648f4d25fe959d
-  specs:
-    ruby_build (0.7.2)
+    rvm (0.9.1)
+      chef_gem (>= 0.0.0)
 
 GIT
   remote: https://github.com/getaroom/chef-redis
@@ -51,14 +53,6 @@ GIT
       sysctl (>= 0.0.0)
 
 GIT
-  remote: https://github.com/phlipper/chef-postgresql
-  ref: master
-  sha: ff499fcff50c1113f74cc32352ebfbede93a06cc
-  specs:
-    postgresql (0.10.1)
-      apt (>= 0.0.0)
-
-GIT
   remote: https://github.com/shingara/oh-my-zsh-chef
   ref: master
   sha: 7da60eca90b9a0b2c2d42b9af02364ab04421043
@@ -68,12 +62,12 @@ GIT
 
 DEPENDENCIES
   apt (>= 0)
+  elasticsearch (>= 0)
   git (>= 0)
   imagemagick (>= 0)
   locale (>= 0)
+  mysql (>= 0)
   oh_my_zsh (>= 0)
-  postgresql (>= 0)
-  rbenv (>= 0)
   redis (>= 0)
-  ruby_build (>= 0)
+  rvm (>= 0)
 
