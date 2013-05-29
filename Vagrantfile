@@ -2,10 +2,14 @@
 
 Vagrant.configure("2") do |config|
 
+  # 
+  # BOX
+  # 
+
   # *** Chef 11.4.0 ***
-  # system_chef_solo: /usr/local/bin/chef-solo
-  # config.vm.box = "omnibus"
-  # config.vm.box_url = "https://s3.amazonaws.com/gsc-vagrant-boxes/ubuntu-12.04-omnibus-chef.box"
+  # system_chef_solo: '/opt/chef/bin/chef-solo'
+  config.vm.box = "omnibus"
+  config.vm.box_url = "https://s3.amazonaws.com/gsc-vagrant-boxes/ubuntu-12.04-omnibus-chef.box"
   
 
   # How to upgrade Chef on vagrant boxes
@@ -15,15 +19,23 @@ Vagrant.configure("2") do |config|
   # issues with some dependecies - need specify version 0.1.0 in Cheffile until upgrade to Chef 11
   # http://community.opscode.com/cookbooks/ark/comments 
 
+  # Vagrant Chef install path
   # system_chef_solo: /opt/vagrant_ruby/bin/chef-solo
-  config.vm.box     = 'precise32'
-  config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
+  # 
+  # Origignal Chef 11.4 install path
+  # system_chef_solo: /opt/chef/bin/chef-solo 
+
+  # config.vm.box     = 'precise32'
+  # config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
 
   # *** Chef 10.14.2 ***
   # system_chef_solo: /opt/vagrant_ruby/bin/chef-solo
   # config.vm.box     = 'precise64'
   # config.vm.box_url = 'http://files.vagrantup.com/precise64.box'
 
+  # 
+  # NETWORK  
+  #
 
   config.vm.network :private_network, ip: '10.255.255.10'
   config.ssh.forward_agent = true
@@ -46,6 +58,10 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |vb|
     vb.customize ['modifyvm', :id, '--memory', 1024]
   end
+
+  # 
+  # CHEF
+  # 
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
@@ -77,16 +93,15 @@ Vagrant.configure("2") do |config|
         :pid_file               => "/var/run/mysqld/mysqld.pid",
         :grants_path            => "/etc/mysql/grants.sql"
       },
-      # rvm: {
-      #   vagrant: {
-      #     # default path in new vagrant boxes is '/opt/vagrant_ruby/bin/chef-solo'
-      #     # see cookbokes/rvm/attributes/vargant.rb
-      #     # but third-party boxes uses different path to chef, 
-      #     # so we need provide correct path specific to used box
-      #     # system_chef_solo: '/opt/ruby/bin/chef-solo'
-      #     system_chef_solo: '/usr/local/bin/chef-solo'
-      #   }
-      # },
+      rvm: {
+        vagrant: {
+          # default path in new vagrant boxes is '/opt/vagrant_ruby/bin/chef-solo'
+          # see cookbokes/rvm/attributes/vargant.rb
+          # but third-party boxes uses different path to chef, 
+          # so we need provide correct path specific to used box
+          system_chef_solo: '/opt/chef/bin/chef-solo'
+        }
+      },
 
       'oh_my_zsh' => {
         'users' => [{
