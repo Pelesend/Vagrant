@@ -77,6 +77,16 @@ Vagrant.configure("2") do |config|
     chef.add_recipe 'locale'
 
     chef.json = {
+      rvm: {
+        vagrant: {
+          # default path in new vagrant boxes is '/opt/vagrant_ruby/bin/chef-solo'
+          # see cookbokes/rvm/attributes/vargant.rb
+          # but third-party boxes uses different path to chef, 
+          # so we need provide correct path specific to used box
+          system_chef_solo: '/opt/chef/bin/chef-solo'
+        },
+        default_ruby: 'ruby-1.9.3-p429'
+      },      
       :mysql => {
         :server_root_password   => "password",
         :server_repl_password   => "password",
@@ -93,16 +103,6 @@ Vagrant.configure("2") do |config|
         :pid_file               => "/var/run/mysqld/mysqld.pid",
         :grants_path            => "/etc/mysql/grants.sql"
       },
-      rvm: {
-        vagrant: {
-          # default path in new vagrant boxes is '/opt/vagrant_ruby/bin/chef-solo'
-          # see cookbokes/rvm/attributes/vargant.rb
-          # but third-party boxes uses different path to chef, 
-          # so we need provide correct path specific to used box
-          system_chef_solo: '/opt/chef/bin/chef-solo'
-        }
-      },
-
       'oh_my_zsh' => {
         'users' => [{
           :login => 'vagrant',
