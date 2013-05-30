@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-Vagrant.configure("2") do |config|
+Vagrant.configure('2') do |config|
 
   # 
   # BOX
@@ -8,9 +8,8 @@ Vagrant.configure("2") do |config|
 
   # *** Chef 11.4.0 ***
   # system_chef_solo: '/opt/chef/bin/chef-solo'
-  config.vm.box = "omnibus"
-  config.vm.box_url = "https://s3.amazonaws.com/gsc-vagrant-boxes/ubuntu-12.04-omnibus-chef.box"
-  
+  config.vm.box = 'omnibus'
+  config.vm.box_url = 'https://s3.amazonaws.com/gsc-vagrant-boxes/ubuntu-12.04-omnibus-chef.box'
 
   # How to upgrade Chef on vagrant boxes
   # http://stackoverflow.com/questions/11325479/how-to-control-the-version-of-chef-that-vagrant-uses-to-provision-vms
@@ -33,6 +32,7 @@ Vagrant.configure("2") do |config|
   # config.vm.box     = 'precise64'
   # config.vm.box_url = 'http://files.vagrantup.com/precise64.box'
 
+
   # 
   # NETWORK  
   #
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # NFS - speedup file synchronization vs standard mode 
-  # config.vm.synced_folder "~/code", "/home/vagrant/code", :nfs => true
+  # config.vm.synced_folder '~/code', '/home/vagrant/code', :nfs => true
 
   # Webrick
   config.vm.network :forwarded_port, guest: 3000, host: 3000
@@ -64,16 +64,15 @@ Vagrant.configure("2") do |config|
   # 
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["cookbooks"]
+    chef.cookbooks_path = ['cookbooks']
     chef.add_recipe 'apt'
     chef.add_recipe 'git'
-    # chef.add_recipe 'mysql::server'
-
     chef.add_recipe 'rvm::vagrant'
     chef.add_recipe 'rvm::system'
+    chef.add_recipe 'mysql::server'
 
     # chef.add_recipe 'redis::install_from_package'
-    # chef.add_recipe 'oh_my_zsh'
+    chef.add_recipe 'oh_my_zsh'
     chef.add_recipe 'locale'
 
     chef.json = {
@@ -87,27 +86,29 @@ Vagrant.configure("2") do |config|
         },
         default_ruby: 'ruby-1.9.3-p429'
       },      
-      :mysql => {
-        :server_root_password   => "password",
-        :server_repl_password   => "password",
-        :server_debian_password => "password",
-        :service_name           => "mysql",
-        :basedir                => "/usr",
-        :data_dir               => "/var/lib/mysql",
-        :root_group             => "root",
-        :mysqladmin_bin         => "/usr/bin/mysqladmin",
-        :mysql_bin              => "/usr/bin/mysql",
-        :conf_dir               => "/etc/mysql",
-        :confd_dir              => "/etc/mysql/conf.d",
-        :socket                 => "/var/run/mysqld/mysqld.sock",
-        :pid_file               => "/var/run/mysqld/mysqld.pid",
-        :grants_path            => "/etc/mysql/grants.sql"
+      mysql: {
+        server_root_password:   'password',
+        server_repl_password:   'password',
+        server_debian_password: 'password',
+        service_name:           'mysql',
+        basedir:                '/usr',
+        data_dir:               '/var/lib/mysql',
+        root_group:             'root',
+        mysqladmin_bin:         '/usr/bin/mysqladmin',
+        mysql_bin:              '/usr/bin/mysql',
+        conf_dir:               '/etc/mysql',
+        confd_dir:              '/etc/mysql/conf.d',
+        socket:                 '/var/run/mysqld/mysqld.sock',
+        pid_file:               '/var/run/mysqld/mysqld.pid',
+        grants_path:            '/etc/mysql/grants.sql',
+        root_network_acl:       '%',
+        allow_remote_root:      true
       },
-      'oh_my_zsh' => {
-        'users' => [{
-          :login => 'vagrant',
-          :theme => 'mortalscumbag',
-          :plugins => ['gem', 'git', 'rails3', 'redis-cli', 'ruby', 'heroku', 'rake', 'rvm', 'capistrano']
+      oh_my_zsh: {
+        users: [{
+          login: 'vagrant',
+          theme: 'mortalscumbag',
+          plugins: ['gem', 'git', 'rails3', 'redis-cli', 'ruby', 'heroku', 'rake', 'rvm', 'capistrano']
         }]
       }
     }

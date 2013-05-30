@@ -16,3 +16,13 @@ $ gem install librarian-chef
 $ librarian-chef install
 $ vagrant up
 ~~~
+
+## MySQL access from host
+
+1) with Sequel Pro
+
+MySQL address: 10.0.2.15
+user: 'root', password: 'password'
+
+SSH address: 10.255.255.10
+user: 'vagrant', password: 'vagrant'
