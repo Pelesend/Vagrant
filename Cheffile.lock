@@ -1,15 +1,14 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    apt (1.9.2)
-    ark (0.2.2)
+    apt (1.10.0)
     build-essential (1.4.0)
     chef_gem (0.1.0)
     chef_handler (1.1.4)
     dmg (1.1.0)
     elasticsearch (0.2.7)
       ark (>= 0.0.0)
-    git (2.5.0)
+    git (2.5.2)
       build-essential (>= 0.0.0)
       dmg (>= 0.0.0)
       runit (>= 1.0)
@@ -23,15 +22,15 @@ SITE
     runit (1.1.4)
       build-essential (>= 0.0.0)
       yum (>= 0.0.0)
-    sysctl (0.3.1)
-    windows (1.8.10)
+    sysctl (0.3.2)
+    windows (1.9.0)
       chef_handler (>= 0.0.0)
-    yum (2.2.0)
+    yum (2.2.2)
 
 GIT
   remote: https://github.com/deepak/chef-locale
   ref: master
-  sha: 2669bd937f589b6ad542da4eb1baa42cfe251030
+  sha: b79da8f2e3cfd7bec7200fdfb1fcc5eda26d2dd8
   specs:
     locale (0.0.2)
 
@@ -53,6 +52,21 @@ GIT
       sysctl (>= 0.0.0)
 
 GIT
+  remote: https://github.com/opscode-cookbooks/ark
+  ref: 0.1.0
+  sha: 084aef10c0797d6f9ac13de668804cf78d6353dc
+  specs:
+    ark (0.1.0)
+
+GIT
+  remote: https://github.com/opscode-cookbooks/java
+  ref: master
+  sha: e20ca6bde2196fef6dddd8c82e79a5dbab03c111
+  specs:
+    java (1.11.5)
+      windows (>= 0.0.0)
+
+GIT
   remote: https://github.com/shingara/oh-my-zsh-chef
   ref: master
   sha: 7da60eca90b9a0b2c2d42b9af02364ab04421043
@@ -62,9 +76,11 @@ GIT
 
 DEPENDENCIES
   apt (>= 0)
+  ark (>= 0)
   elasticsearch (>= 0)
   git (>= 0)
   imagemagick (>= 0)
+  java (>= 0)
   locale (>= 0)
   mysql (>= 0)
   oh_my_zsh (>= 0)

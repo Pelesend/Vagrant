@@ -71,7 +71,10 @@ Vagrant.configure('2') do |config|
     chef.add_recipe 'rvm::system'
     chef.add_recipe 'mysql::server'
 
-    # chef.add_recipe 'redis::install_from_package'
+    chef.add_recipe 'java'
+    chef.add_recipe 'elasticsearch'
+
+    chef.add_recipe 'redis::install_from_package'
     chef.add_recipe 'oh_my_zsh'
     chef.add_recipe 'locale'
 
@@ -80,12 +83,16 @@ Vagrant.configure('2') do |config|
         vagrant: {
           # default path in new vagrant boxes is '/opt/vagrant_ruby/bin/chef-solo'
           # see cookbokes/rvm/attributes/vargant.rb
-          # but third-party boxes uses different path to chef, 
+          # but third-party boxes use different path to chef, 
           # so we need provide correct path specific to used box
           system_chef_solo: '/opt/chef/bin/chef-solo'
         },
         default_ruby: 'ruby-1.9.3-p429'
-      },      
+      },  
+      java: {
+        install_flavor: 'oracle',
+        oracle: { accept_oracle_download_terms: true } 
+      },    
       mysql: {
         server_root_password:   'password',
         server_repl_password:   'password',
