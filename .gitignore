@@ -1,3 +1,6 @@
 cookbooks
 tmp
 .vagrant
+.rvmrc
+*.box
+.idea
