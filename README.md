@@ -68,6 +68,7 @@ vagrant ssh
 ```
 
 The project code is found in the /vagrant directory in the image.
+
 **Note:** After `vagrant ssh` by default you appear at vagrant user home directory `~` or `/home/vagrant`, and for enter project directory you need run `cd /vagrant`
 
 **Note to Windows users**: You cannot run ```vagrant ssh``` from a cmd prompt; you'll receive the error message:
@@ -110,19 +111,28 @@ You can now edit files on your local file system, using your favorite text edito
 
 ### MySQL access from host
 
-1. with Sequel Pro
+You may want to access MySQL DB with such admin tool as 'Sequel Pro', in this case use SSH connection type and this access details:
 
+```
 MySQL address: 10.0.2.15
 user: 'root', password: 'password'
 
 SSH address: 10.255.255.10
 user: 'vagrant', password: 'vagrant'
+```
 
+more info: [Connect to a Remote MySQL Server](http://www.sequelpro.com/docs/Connecting_to_a_MySQL_Server_on_a_Remote_Host)
 
 ### Shutting down the VM
 
 When you're done working on project, you can shut down Vagrant with:
 
+exit from Vagrant shell
+```
+exit
+```
+
+and halt VM
 ```
 vagrant halt
 ```
